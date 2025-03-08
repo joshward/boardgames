@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>Home page</div>;
+  return <section className="h-[5000px]">Home page</section>;
 }

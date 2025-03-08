@@ -1,7 +1,71 @@
 @import "tailwindcss";
 
+@import "@radix-ui/colors/white-alpha.css";
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/colors/slate.css";
+@import "@radix-ui/colors/slate-dark.css";
+@import "@radix-ui/colors/indigo.css";
+@import "@radix-ui/colors/indigo-dark.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-*: initial;
   /*noinspection CssUnresolvedCustomProperty*/
   --font-sans: var(--font-quicksand-sans);
+  /*noinspection CssUnresolvedCustomProperty*/
+  --font-serif: var(--font-crimson-serif);
+
+  --color-*: initial;
+  --color-white: rgb(255, 255, 255);
+  --color-white-a1: var(--white-a1);
+  --color-white-a2: var(--white-a2);
+  --color-white-a3: var(--white-a3);
+  --color-white-a4: var(--white-a4);
+  --color-white-a5: var(--white-a5);
+  --color-white-a6: var(--white-a6);
+  --color-white-a7: var(--white-a7);
+  --color-white-a9: var(--white-a9);
+  --color-white-a10: var(--white-a10);
+  --color-white-a11: var(--white-a11);
+  --color-white-a12: var(--white-a12);
+
+  --color-black: rgb(0, 0, 0);
+  --color-black-a1: var(--black-a1);
+  --color-black-a2: var(--black-a2);
+  --color-black-a3: var(--black-a3);
+  --color-black-a4: var(--black-a4);
+  --color-black-a5: var(--black-a5);
+  --color-black-a6: var(--black-a6);
+  --color-black-a7: var(--black-a7);
+  --color-black-a9: var(--black-a9);
+  --color-black-a10: var(--black-a10);
+  --color-black-a11: var(--black-a11);
+  --color-black-a12: var(--black-a12);
+
+  --color-slate-1: var(--slate-1);
+  --color-slate-2: var(--slate-2);
+  --color-slate-3: var(--slate-3);
+  --color-slate-4: var(--slate-4);
+  --color-slate-5: var(--slate-5);
+  --color-slate-6: var(--slate-6);
+  --color-slate-7: var(--slate-7);
+  --color-slate-8: var(--slate-8);
+  --color-slate-9: var(--slate-9);
+  --color-slate-10: var(--slate-10);
+  --color-slate-11: var(--slate-11);
+  --color-slate-12: var(--slate-12);
+  
+  --color-indigo-1: var(--indigo-1);
+  --color-indigo-2: var(--indigo-2);
+  --color-indigo-3: var(--indigo-3);
+  --color-indigo-4: var(--indigo-4);
+  --color-indigo-5: var(--indigo-5);
+  --color-indigo-6: var(--indigo-6);
+  --color-indigo-7: var(--indigo-7);
+  --color-indigo-8: var(--indigo-8);
+  --color-indigo-9: var(--indigo-9);
+  --color-indigo-10: var(--indigo-10);
+  --color-indigo-11: var(--indigo-11);
+  --color-indigo-12: var(--indigo-12);
 }
