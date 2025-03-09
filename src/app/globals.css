@@ -6,16 +6,33 @@
 @import "@radix-ui/colors/slate-dark.css";
 @import "@radix-ui/colors/indigo.css";
 @import "@radix-ui/colors/indigo-dark.css";
+@import "@radix-ui/colors/sage.css";
+@import "@radix-ui/colors/sage-dark.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* ---- Fonts ---- */
   --font-*: initial;
   /*noinspection CssUnresolvedCustomProperty*/
   --font-sans: var(--font-quicksand-sans);
   /*noinspection CssUnresolvedCustomProperty*/
   --font-serif: var(--font-crimson-serif);
 
+  /* ---- animation ---- */
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+
+
+  /* ---- Colors ---- */
   --color-*: initial;
   --color-white: rgb(255, 255, 255);
   --color-white-a1: var(--white-a1);
@@ -68,4 +85,17 @@
   --color-indigo-10: var(--indigo-10);
   --color-indigo-11: var(--indigo-11);
   --color-indigo-12: var(--indigo-12);
+
+  --color-sage-1: var(--sage-1);
+  --color-sage-2: var(--sage-2);
+  --color-sage-3: var(--sage-3);
+  --color-sage-4: var(--sage-4);
+  --color-sage-5: var(--sage-5);
+  --color-sage-6: var(--sage-6);
+  --color-sage-7: var(--sage-7);
+  --color-sage-8: var(--sage-8);
+  --color-sage-9: var(--sage-9);
+  --color-sage-10: var(--sage-10);
+  --color-sage-11: var(--sage-11);
+  --color-sage-12: var(--sage-12);
 }
