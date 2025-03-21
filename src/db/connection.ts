@@ -9,7 +9,7 @@ if (!connectionString) {
 // Configuring Neon for local development
 if (connectionString.includes("db.localtest.me")) {
   neonConfig.fetchEndpoint = () => {
-    return `http://db.localtesa t.me:4444/sql`;
+    return `http://db.localtest.me:4444/sql`;
   };
   neonConfig.useSecureWebSocket = false;
   neonConfig.wsProxy = () => {

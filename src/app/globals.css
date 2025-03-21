@@ -8,6 +8,8 @@
 @import "@radix-ui/colors/indigo-dark.css";
 @import "@radix-ui/colors/sage.css";
 @import "@radix-ui/colors/sage-dark.css";
+@import "@radix-ui/colors/plum.css";
+@import "@radix-ui/colors/plum-dark.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -98,4 +100,17 @@
   --color-sage-10: var(--sage-10);
   --color-sage-11: var(--sage-11);
   --color-sage-12: var(--sage-12);
+
+  --color-plum-1: var(--plum-1);
+  --color-plum-2: var(--plum-2);
+  --color-plum-3: var(--plum-3);
+  --color-plum-4: var(--plum-4);
+  --color-plum-5: var(--plum-5);
+  --color-plum-6: var(--plum-6);
+  --color-plum-7: var(--plum-7);
+  --color-plum-8: var(--plum-8);
+  --color-plum-9: var(--plum-9);
+  --color-plum-10: var(--plum-10);
+  --color-plum-11: var(--plum-11);
+  --color-plum-12: var(--plum-12);
 }
