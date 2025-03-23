@@ -1,87 +1,75 @@
-import { XMLParser } from "fast-xml-parser";
+import * as v from "valibot";
+import { callBggApi } from "./call";
+import { parseBggApiResponse } from "./parser";
+import { asArray } from "./utilities";
+import { NameType, ResultType, SearchResult, SearchResults } from "./models";
+import { ParseError } from "./errors";
 
-interface SearchResult {
-  id: number;
-  name: string;
-  yearPublished?: number;
-  nameType: string;
-  type: string;
-}
+const SearchResultScheme = v.object({
+  "@_id": v.pipe(v.number(), v.integer(), v.minValue(1)),
+  "@_type": v.enum(ResultType),
+  name: v.object({
+    "@_type": v.enum(NameType),
+    "@_value": v.string(),
+  }),
+  yearpublished: v.optional(
+    v.object({
+      "@_value": v.number(),
+    }),
+  ),
+});
 
-interface SearchResults {
-  items: SearchResult[];
-}
+const SearchResultsScheme = v.object({
+  items: v.optional(
+    v.object({
+      item: v.optional(
+        v.union([v.array(v.looseObject({})), v.looseObject({})]),
+      ),
+    }),
+  ),
+});
 
-type OneOrMany<T> = T | T[];
-
-interface RawParsedSearchGameResult {
-  "@_id": number;
-  "@_type": string;
-  name: {
-    "@_type": string;
-    "@_value": string;
-  };
-  yearpublished?: {
-    "@_value": number;
-  };
-}
-
-interface RawParsedSearchResults {
-  items?: {
-    item?: OneOrMany<RawParsedSearchGameResult>;
-  };
-}
-
-function asArray<T>(value: OneOrMany<T> | undefined): T[] {
-  if (!value) {
-    return [];
+function mapSearchResult(item: unknown): SearchResult {
+  const parsed = v.safeParse(SearchResultScheme, item);
+  if (!parsed.success) {
+    throw new ParseError(
+      "Failed to parse search result item",
+      item,
+      v.flatten(parsed.issues),
+    );
   }
 
-  return Array.isArray(value) ? value : [value];
-}
+  const data = parsed.output;
 
-function mapSearchResult(item: RawParsedSearchGameResult): SearchResult {
   return {
-    id: item["@_id"],
-    name: item.name["@_value"],
-    nameType: item.name["@_type"],
-    type: item["@_type"],
-    yearPublished: item.yearpublished?.["@_value"],
+    id: data["@_id"],
+    name: data.name?.["@_value"],
+    nameType: data.name?.["@_type"],
+    type: data["@_type"],
+    yearPublished: data.yearpublished?.["@_value"],
   };
 }
 
-type WithRaw<T> = T & { rawXml: string; rawJson: unknown };
-
-export async function search(term: string): Promise<WithRaw<SearchResults>> {
-  const result = await fetch(
-    `https://www.boardgamegeek.com/xmlapi2/search?type=boardgame&query=${encodeURIComponent(term)}`,
+export async function search(term: string): Promise<SearchResults> {
+  const response = await callBggApi(
+    `search?type=boardgame&query=${encodeURIComponent(term)}`,
   );
 
-  if (!result.ok) {
-    throw new Error(`Failed to fetch search results: ${result.statusText}`);
+  const rawParsed = parseBggApiResponse(response);
+  const parsed = v.safeParse(SearchResultsScheme, rawParsed);
+  if (!parsed.success) {
+    throw new ParseError(
+      "Failed to parse search results root",
+      rawParsed,
+      v.flatten(parsed.issues),
+    );
   }
 
-  const rawXml = await result.text();
-
-  const parser = new XMLParser({
-    allowBooleanAttributes: true,
-    ignoreAttributes: false,
-    attributeNamePrefix: "@_",
-    ignoreDeclaration: true,
-    ignorePiTags: true,
-    processEntities: false,
-    parseAttributeValue: true,
-    parseTagValue: true,
-  });
-  const rawJson = parser.parse(rawXml) as RawParsedSearchResults;
-
-  const items: SearchResult[] = asArray(rawJson.items?.item)
+  const items: SearchResult[] = asArray(parsed.output.items?.item)
     .map(mapSearchResult)
-    .filter((item) => item.type === "boardgame");
+    .filter((item) => item.type === ResultType.Boardgame);
 
   return {
-    rawXml,
-    rawJson,
     items,
   };
 }
