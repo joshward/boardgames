@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
 import { twMerge } from "tailwind-merge";
-import { DefaultTransitionStyles, FocusStyles } from "@/styles/common";
+import {
+  DefaultTransitionStyles,
+  FocusResetStyles,
+  ShowFocusOnKeyboardStyles,
+} from "@/styles/common";
 
 export function HeaderActions() {
   const [mounted, setMounted] = useState(false);
@@ -22,8 +26,9 @@ export function HeaderActions() {
         onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         className={twMerge(
           DefaultTransitionStyles,
-          FocusStyles,
-          "bg-sage-5 hover:bg-sage-6 text-sage-12 rounded-xl p-3",
+          FocusResetStyles,
+          ShowFocusOnKeyboardStyles,
+          "bg-sage-5 hover:bg-sage-6 text-sage-12 cursor-pointer rounded-xl p-3",
         )}
         aria-label={`Toggle to ${resolvedTheme} mode`}
       >

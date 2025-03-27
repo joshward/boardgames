@@ -51,7 +51,7 @@ export default function GameSearch() {
   const [searchTerm, setSearchTerm] = useState("");
   const standardSearchTerm = searchTerm.trim();
 
-  const query = useQuery({
+  const searchQuery = useQuery({
     queryKey: ["bgg-games", standardSearchTerm],
     queryFn: standardSearchTerm
       ? fetcher<SearchResults>(`/api/bgg/search?term=${standardSearchTerm}`)
@@ -59,15 +59,17 @@ export default function GameSearch() {
     retry: shouldRetry,
     staleTime: Infinity,
   });
-  console.log(query);
 
   return (
     <div>
-      <SearchInput onSearch={setSearchTerm} />
-      {query.isLoading ? "Loading..." : null}
-      {query.isError ? "Error" : null}
-      {query.data ? (
-        <pre>{JSON.stringify(query.data, undefined, " ")}</pre>
+      <SearchInput
+        onSearch={setSearchTerm}
+        isSearching={searchQuery.isLoading}
+      />
+      {searchQuery.isLoading ? "Loading..." : null}
+      {searchQuery.isError ? "Error" : null}
+      {searchQuery.data ? (
+        <pre>{JSON.stringify(searchQuery.data, undefined, " ")}</pre>
       ) : null}
     </div>
   );

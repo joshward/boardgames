@@ -1,11 +1,20 @@
-import TextInput from "@/components/TextInput";
 import { useEffect, useState } from "react";
+import {
+  MagnifyingGlassIcon,
+  UpdateIcon,
+  Cross1Icon,
+} from "@radix-ui/react-icons";
+import TextInput from "@/components/TextInput";
 
 interface SearchInputProps {
   onSearch: (term: string) => void;
+  isSearching?: boolean;
 }
 
-export default function SearchInput({ onSearch }: SearchInputProps) {
+export default function SearchInput({
+  onSearch,
+  isSearching,
+}: SearchInputProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -19,6 +28,31 @@ export default function SearchInput({ onSearch }: SearchInputProps) {
   return (
     <div>
       <TextInput
+        pre={{
+          value: isSearching ? (
+            <UpdateIcon
+              className="animate-spin"
+              aria-label="Search Loading..."
+            />
+          ) : (
+            <MagnifyingGlassIcon aria-label="Search Entry" />
+          ),
+        }}
+        post={
+          searchTerm
+            ? {
+                value: (
+                  <Cross1Icon
+                    className="text-ruby-10"
+                    aria-label="Clear Search"
+                  />
+                ),
+                onClick: () => {
+                  setSearchTerm("");
+                },
+              }
+            : undefined
+        }
         value={searchTerm}
         className="w-full"
         autoFocus
