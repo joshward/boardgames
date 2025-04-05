@@ -3,9 +3,9 @@ export enum NameType {
   Alternate = "alternate",
 }
 
-export enum ResultType {
+export enum ThingType {
   Boardgame = "boardgame",
-  Expansion = "expansion",
+  Expansion = "boardgameexpansion",
 }
 
 export interface SearchResult {
@@ -13,9 +13,34 @@ export interface SearchResult {
   name: string;
   yearPublished?: number;
   nameType: NameType;
-  type: ResultType;
+  type: ThingType;
 }
 
 export interface SearchResults {
   items: SearchResult[];
+}
+
+export interface Boardgame {
+  id: number;
+  type: ThingType;
+  name: string;
+  alternateNames: string[];
+  artists: string[];
+  categories: string[];
+  mechanics: string[];
+  designers: string[];
+  publishers: string[];
+  families: string[];
+  maxPlayers: number;
+  minPlayers: number;
+  playTime: number;
+  minPlayTime: number;
+  maxPlayTime: number;
+  imageUrl?: string;
+  thumbnailUrl?: string;
+  yearPublished: number;
+  description: string;
+  rating?: number;
+  weight?: number;
+  numRatings?: number;
 }

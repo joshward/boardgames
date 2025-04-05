@@ -12,6 +12,10 @@
 @import "@radix-ui/colors/plum-dark.css";
 @import "@radix-ui/colors/ruby.css";
 @import "@radix-ui/colors/ruby-dark.css";
+@import "@radix-ui/colors/orange.css";
+@import "@radix-ui/colors/orange-dark.css";
+@import "@radix-ui/colors/sand.css";
+@import "@radix-ui/colors/sand-dark.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -128,4 +132,31 @@
   --color-ruby-10: var(--ruby-10);
   --color-ruby-11: var(--ruby-11);
   --color-ruby-12: var(--ruby-12);
+
+
+  --color-orange-1: var(--orange-1);
+  --color-orange-2: var(--orange-2);
+  --color-orange-3: var(--orange-3);
+  --color-orange-4: var(--orange-4);
+  --color-orange-5: var(--orange-5);
+  --color-orange-6: var(--orange-6);
+  --color-orange-7: var(--orange-7);
+  --color-orange-8: var(--orange-8);
+  --color-orange-9: var(--orange-9);
+  --color-orange-10: var(--orange-10);
+  --color-orange-11: var(--orange-11);
+  --color-orange-12: var(--orange-12);
+
+  --color-sand-1: var(--sand-1);
+  --color-sand-2: var(--sand-2);
+  --color-sand-3: var(--sand-3);
+  --color-sand-4: var(--sand-4);
+  --color-sand-5: var(--sand-5);
+  --color-sand-6: var(--sand-6);
+  --color-sand-7: var(--sand-7);
+  --color-sand-8: var(--sand-8);
+  --color-sand-9: var(--sand-9);
+  --color-sand-10: var(--sand-10);
+  --color-sand-11: var(--sand-11);
+  --color-sand-12: var(--sand-12);
 }

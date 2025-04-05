@@ -9,13 +9,15 @@ import TextInput from "@/components/TextInput";
 interface SearchInputProps {
   onSearch: (term: string) => void;
   isSearching?: boolean;
+  initialTerm?: string;
 }
 
 export default function SearchInput({
   onSearch,
   isSearching,
+  initialTerm,
 }: SearchInputProps) {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(initialTerm ?? "");
 
   useEffect(() => {
     const timeout = setTimeout(() => {

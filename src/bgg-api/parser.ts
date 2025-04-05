@@ -8,8 +8,8 @@ export function parseBggApiResponse(response: string): unknown {
     ignoreDeclaration: true,
     ignorePiTags: true,
     processEntities: false,
-    parseAttributeValue: true,
-    parseTagValue: true,
+    parseAttributeValue: false,
+    parseTagValue: false,
   });
 
   return parser.parse(response);
